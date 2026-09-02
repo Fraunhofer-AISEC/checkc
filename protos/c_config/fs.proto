@@ -1,0 +1,57 @@
+// Copyright (c) 2022 - 2026 Fraunhofer AISEC
+// Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e.V.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package c_config.fs;
+
+import "c_config/ns.proto";
+
+
+message MountNamespace {
+  // id of the mount namespace (st_dev:st_ino) the path was retrieved from
+  c_config.ns.Id ns_id = 1;
+  // pid the mount ns id was retrieved from 
+  repeated int32 ns_pids = 2;
+  repeated string  mounts = 3;
+  repeated string  mountinfo = 4;
+  // in container mode report: stores paths to created flag files
+  // in host mode report: contains locations where flag files where visible from host side
+  repeated string flag_files = 6;
+
+}
+
+enum SkipReason {
+	UNKNOWN = 0;
+	KERNEL_THREAD = 1;
+	// container process skipped in checkc host mode run
+	CONTAINER_PROCESS = 2;
+	PROCESS_VANISHED = 3;
+	PERMISSION_DENIED = 4;
+}
+
+message FailedMountPoint {
+	string mount = 1;
+	// container mode: reason why flag file was not written
+	// host mode: reason why mount point was skipped during flag file search
+	SkipReason skip_reason = 2;
+}
+
+message Config {
+  // list of found mount namspaces
+  repeated MountNamespace container_namespaces = 1;
+  repeated MountNamespace ref_container_namespaces = 2;
+  repeated MountNamespace host_namespaces = 3;
+}

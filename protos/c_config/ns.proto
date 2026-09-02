@@ -1,0 +1,56 @@
+// Copyright (c) 2022 - 2026 Fraunhofer AISEC
+// Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e.V.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package c_config.ns;
+
+message Config {
+    // container namespaces not shared with host
+    repeated Info unshared = 1;
+    // container namespaces shared with host
+    repeated Info shared_host = 2;
+
+    Hierarchy user_ns_hierarchy = 3;
+    Hierarchy pid_ns_hierarchy = 4;
+}
+
+enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_CGROUP = 1;
+    TYPE_IPC = 2;
+    TYPE_NETWORK = 3;
+    TYPE_MOUNT = 4;
+    TYPE_PID = 5;
+    TYPE_TIME = 6;
+    TYPE_USER = 7;
+    TYPE_UTS = 8;
+}
+
+message Id {
+    uint64 st_dev = 1; // st_dev of namespace file
+    uint64 st_ino = 2; // st_ino of namespace file
+}
+
+message Info {
+    Type type = 1; // namespace type
+    Id id = 2; // namespace id
+    Id owner = 3; // owning user namespace
+}
+
+message Hierarchy {
+    Id parent = 1;
+    repeated Hierarchy children = 2;
+}

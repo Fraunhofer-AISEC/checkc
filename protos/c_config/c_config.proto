@@ -1,0 +1,48 @@
+// Copyright (c) 2022 - 2026 Fraunhofer AISEC
+// Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e.V.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package c_config;
+
+import "c_config/ns.proto";
+import "c_config/caps.proto";
+import "c_config/cgroup.proto";
+import "c_config/fs.proto";
+import "c_config/user_ns.proto";
+import "c_config/seccomp.proto";
+import "c_config/uts.proto";
+import "c_config/chroot.proto";
+import "c_config/device.proto";
+
+message HostInfo {
+  repeated int32 pids_container = 1;
+  repeated int32 pids_ref_container = 2;
+  int32 pid_host = 3;
+}
+
+message Config {
+  c_config.ns.Config ns_config = 1;
+  c_config.caps.Config caps_config = 2;
+  c_config.cgroup.Config cgroup_config = 3;
+  c_config.fs.Config fs_config = 4;
+  c_config.user_ns.Config user_ns_config = 5;
+  c_config.seccomp.Config seccomp_config = 6;
+  c_config.uts.Config uts_config_host = 7;
+  c_config.uts.Config uts_config_container = 8;
+  c_config.chroot.Config chroot_config = 9;
+  c_config.device.Config device_config = 10;
+  optional HostInfo info = 11;
+}

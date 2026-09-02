@@ -1,0 +1,71 @@
+// Copyright (c) 2022 - 2026 Fraunhofer AISEC
+// Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e.V.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package c_config.caps;
+
+message Config {
+  repeated Capability capInh = 1;
+  repeated Capability capPrm = 2;
+  repeated Capability capEff = 3;
+  repeated Capability capBnd = 4;
+  repeated Capability capAmb = 5;
+}
+
+enum Capability {
+  CAPABILITY_UNSPECIFIED = 0;
+  CAPABILITY_CAP_CHOWN = 1;
+  CAPABILITY_CAP_DAC_OVERRIDE = 2;
+  CAPABILITY_CAP_DAC_READ_SEARCH = 3;
+  CAPABILITY_CAP_FOWNER = 4;
+  CAPABILITY_CAP_FSETID = 5;
+  CAPABILITY_CAP_KILL = 6;
+  CAPABILITY_CAP_SETGID = 7;
+  CAPABILITY_CAP_SETUID = 8;
+  CAPABILITY_CAP_SETPCAP = 9;
+  CAPABILITY_CAP_LINUX_IMMUTABLE = 10;
+  CAPABILITY_CAP_NET_BIND_SERVICE = 11;
+  CAPABILITY_CAP_NET_BROADCAST = 12;
+  CAPABILITY_CAP_NET_ADMIN = 13;
+  CAPABILITY_CAP_NET_RAW = 14;
+  CAPABILITY_CAP_IPC_LOCK = 15;
+  CAPABILITY_CAP_IPC_OWNER = 16;
+  CAPABILITY_CAP_SYS_MODULE = 17;
+  CAPABILITY_CAP_SYS_RAWIO = 18;
+  CAPABILITY_CAP_SYS_CHROOT = 19;
+  CAPABILITY_CAP_SYS_PTRACE = 20;
+  CAPABILITY_CAP_SYS_PACCT = 21;
+  CAPABILITY_CAP_SYS_ADMIN = 22;
+  CAPABILITY_CAP_SYS_BOOT = 23;
+  CAPABILITY_CAP_SYS_NICE = 24;
+  CAPABILITY_CAP_SYS_RESOURCE = 25;
+  CAPABILITY_CAP_SYS_TIME = 26;
+  CAPABILITY_CAP_SYS_TTY_CONFIG = 27;
+  CAPABILITY_CAP_MKNOD = 28;
+  CAPABILITY_CAP_LEASE = 29;
+  CAPABILITY_CAP_AUDIT_WRITE = 30;
+  CAPABILITY_CAP_AUDIT_CONTROL = 31;
+  CAPABILITY_CAP_SETFCAP = 32;
+  CAPABILITY_CAP_MAC_OVERRIDE = 33;
+  CAPABILITY_CAP_MAC_ADMIN = 34;
+  CAPABILITY_CAP_SYSLOG = 35;
+  CAPABILITY_CAP_WAKE_ALARM = 36;
+  CAPABILITY_CAP_BLOCK_SUSPEND = 37;
+  CAPABILITY_CAP_AUDIT_READ = 38;
+  CAPABILITY_CAP_PERFMON = 39;
+  CAPABILITY_CAP_BPF = 40;
+  CAPABILITY_CAP_CHECKPOINT_RESTORE = 41;
+}

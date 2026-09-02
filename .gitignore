@@ -1,0 +1,7 @@
+target
+scripts/podman/reports/*
+*.swp
+*.raw
+*.img
+*.tar.xz
+*.iso
